@@ -32,16 +32,17 @@ class App extends Component {
         'content-type': 'application/json'
       },
       method: 'POST', // *GET, PUT, DELETE, etc.
-      mode: 'cors', // no-cors, *same-origin
+      mode: 'no-cors', // no-cors, *same-origin
       redirect: 'follow', // *manual, error
-      referrer: 'no-referrer', // *client
+      referrer: 'no-referrer' // *client
     })
     .then(response => response.json()) // parses response to JSON
+    .catch( err => console.log(err))
   }
 
   postNewUser(newUser) {
     console.log("POST FUNCTION");
-    const url = './newUser/';
+    const url = 'http://api.teamhearthleague.com/public/newUser/';
     this.postData(url, newUser)
     .then( response => console.log(response))
     .catch( err => console.log(err))
