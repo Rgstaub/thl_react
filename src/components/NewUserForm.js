@@ -2,7 +2,9 @@
 
 import React, { Component } from 'react';
 import './NewUserForm.css';
-import InputEmail from './subcomponents/InputEmail.js'
+import InputEmail from './subcomponents/InputEmail.js';
+import InputEmailConfirm from './subcomponents/InputEmailConfirm.js';
+
 
 class NewUserForm extends Component {
   
@@ -12,6 +14,7 @@ class NewUserForm extends Component {
     this.state={
       username: "",
       email: "",
+      emailConfirm: false,
       battlenetId: "",
       password: "",
       passwordConfirm: "",
@@ -25,39 +28,39 @@ class NewUserForm extends Component {
     })
   }
 
-  handleInputChange(event) {
-    const field = event.target.name;
-    const value = event.target.value;
-    // eslint-disable-next-line
-    switch(field) {
-      case "email":
-        this.setState({ email: value }, () => this.checkReady());
-        break;
-      case "username":
-        this.setState({ username: value }, () => this.checkReady());
-        break;
-      case "battlenetId":
-        this.setState({ battlenetId: value }, () => this.checkReady());
-        break;
-      case "password":
-        this.setState({ password: value }, () => this.checkReady());
-        break;
-      case "passwordConfirm":
-        this.setState({ passwordConfirm: value }, () => this.checkReady())
-    } 
-  }
+  // handleInputChange(event) {
+  //   const field = event.target.name;
+  //   const value = event.target.value;
+  //   // eslint-disable-next-line
+  //   switch(field) {
+  //     case "email":
+  //       this.setState({ email: value }, () => this.checkReady());
+  //       break;
+  //     case "username":
+  //       this.setState({ username: value }, () => this.checkReady());
+  //       break;
+  //     case "battlenetId":
+  //       this.setState({ battlenetId: value }, () => this.checkReady());
+  //       break;
+  //     case "password":
+  //       this.setState({ password: value }, () => this.checkReady());
+  //       break;
+  //     case "passwordConfirm":
+  //       this.setState({ passwordConfirm: value }, () => this.checkReady())
+  //   } 
+  // }
 
-  validateEmail(email) {
-    // eslint-disable-next-line
-    const re = /^(([^<>()[\]{}'^?\\.,!|//#%*-+=&;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-    this.setState({ emailMessage: ""});
-    if (re.test(email)) {
-      return true;
-    } else {
-      this.setState({ emailMessage: "Invalid email address"});
-      return false;
-    }
-  }
+  // validateEmail(email) {
+  //   // eslint-disable-next-line
+  //   const re = /^(([^<>()[\]{}'^?\\.,!|//#%*-+=&;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+  //   this.setState({ emailMessage: ""});
+  //   if (re.test(email)) {
+  //     return true;
+  //   } else {
+  //     this.setState({ emailMessage: "Invalid email address"});
+  //     return false;
+  //   }
+  // }
 
   validatePassword(password) {
     const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})");
@@ -116,9 +119,13 @@ class NewUserForm extends Component {
   render() {
     return (
       <div>
-        {this.state.email}
+        Email: {this.state.email}
         <InputEmail
-          returnValue={this.returnValue} 
+          returnValue = {this.returnValue} 
+        />
+        <InputEmailConfirm 
+          emailToMatch = {this.state.email}
+          returnValue = {this.returnValue} 
         />
       </div>
     );

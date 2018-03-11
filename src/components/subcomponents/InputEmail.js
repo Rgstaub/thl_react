@@ -12,29 +12,29 @@ class InputEmail extends Component {
   }
 
   handleChange = (e) => {
-    if ( this.state.valid === false ) {
+    if ( this.state.valid !== null ) {
       this.validateEmail(e.target.value);
     } 
-    if (this.state.valid) {
-      this.props.returnValue(e.target.value);
-    }
   }
 
+  // Don't validate the input until after the first time it loses focus
   handleBlur = (e) => {
-    if (this.state.valid)
-    this.validateEmail(e.target.value);
+    if (this.state.valid === null) {
+      this.setState({ valid: false });
+      this.validateEmail(e.target.value);
+    }
   }
   
   validateEmail = (email) => {
     // eslint-disable-next-line
     const regEx = /^(([^<>()[\]{}'^?\\.,!|//#%*-+=&;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     if (regEx.test(email)) {
-      //return { valid: true, value: email } 
       this.setState({ valid: true, warning: '' })
-      this.props.returnValue(email)
+      this.props.returnValue('email', email)
     }
     else {
       this.setState({ valid: false, warning: 'Invalid email address' })
+      this.props.returnValue('email', '')
     }
   } 
 
@@ -55,8 +55,3 @@ class InputEmail extends Component {
    
 export default InputEmail;
 
-/* start with valid:null
-onBlur, validate and set valid
-if valid: false, validate on each change
-if valid: true or null, don't validate on change
-*/
