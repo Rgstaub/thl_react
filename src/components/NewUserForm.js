@@ -16,10 +16,13 @@ class NewUserForm extends Component {
       password: "",
       passwordConfirm: "",
       ready: false,
-      passwordConfirmMessage: "",
-      emailMessage: "",
-      passwordMessage: ""
     }
+  }
+
+  returnValue = (name, value) => {
+    this.setState({
+      [name]: value
+    })
   }
 
   handleInputChange(event) {
@@ -113,7 +116,10 @@ class NewUserForm extends Component {
   render() {
     return (
       <div>
-        <InputEmail />
+        {this.state.email}
+        <InputEmail
+          returnValue={this.returnValue} 
+        />
       </div>
     );
   }
