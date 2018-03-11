@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import './NewUserForm.css';
 import InputEmail from './subcomponents/InputEmail.js';
 import InputEmailConfirm from './subcomponents/InputEmailConfirm.js';
+import InputPassword from './subcomponents/InputPassword.js';
 
 
 class NewUserForm extends Component {
@@ -120,12 +121,17 @@ class NewUserForm extends Component {
     return (
       <div>
         Email: {this.state.email}
+        <br />
+        Password: {this.state.password}
         <InputEmail
           returnValue = {this.returnValue} 
         />
         <InputEmailConfirm 
           emailToMatch = {this.state.email}
           returnValue = {this.returnValue} 
+        />
+        <InputPassword 
+          returnValue = {this.returnValue}
         />
       </div>
     );
