@@ -2,9 +2,8 @@
 
 import React, { Component } from 'react';
 import './NewUserForm.css';
-import InputEmail from './subcomponents/InputEmail.js'
 
-class NewUserForm extends Component {
+class RegistrationForm extends Component {
   
   constructor(props) {
     super(props);
@@ -112,11 +111,9 @@ class NewUserForm extends Component {
 
   render() {
     return (
-      <div>
-        <InputEmail />
-      </div>
+
     );
   }
 }
 
-export default NewUserForm;
+export default RegistrationForm;
