@@ -24,24 +24,25 @@ class NewUserForm extends Component {
     }
   }
 
-  returnValue = (name, value) => {
+  returnValue(name, value) {
     this.setState({
       [name]: value
     })
   }
 
-  checkReady = () => {
+  checkReady() {
     if (
       this.state.email && this.state.emailConfirm &&
       this.state.password && this.state.passwordConfirm &&
       this.state.battlenetId && this.state.username
     ) {
-    this.setState({ ready: true });
-  } else {
-    this.setState({ ready: false});
+      this.setState({ ready: true });
+    } else {
+      this.setState({ ready: false});
+    }
   }
 
-  submitNewUser = (event) => {
+  submitNewUser(event) {
     event.preventDefault();
     const data = {
       email: this.state.email,
@@ -61,7 +62,7 @@ class NewUserForm extends Component {
     }).catch( err => console.log(err));
   }
 
-  render = () => {
+  render() {
     return (
       <div>
         <form className="text-left container-fluid">  
