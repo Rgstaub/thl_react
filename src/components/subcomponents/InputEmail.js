@@ -42,7 +42,7 @@ class InputEmail extends Component {
     return (
       <div className="form-group">
         <label htmlFor="emailInput">Email
-          <input type="text" name="email" id="emailInput" className="form-control"
+          <input type="email" name="email" id="emailInput" className="form-control"
             onBlur={this.handleBlur}
             onChange={this.handleChange}
           />

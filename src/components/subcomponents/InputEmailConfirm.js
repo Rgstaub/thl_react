@@ -23,6 +23,7 @@ class InputEmailConfirm extends Component {
       this.setState({ valid: false });
       this.matchEmail(e.target.value);
     } else {
+      console.log(e.target.value);
       this.matchEmail(e.target.value);
     }
   }
@@ -32,7 +33,7 @@ class InputEmailConfirm extends Component {
       this.setState({ valid: true, warning: '' })
       this.props.returnValue('emailConfirm', true)
     } else {
-      this.setState({ valid: false, warning: 'Passwords do not match'})
+      this.setState({ valid: false, warning: 'Email addresses do not match'})
       this.props.returnValue('emailConfirm', false)
     }
   }
@@ -40,8 +41,8 @@ class InputEmailConfirm extends Component {
   render() {
     return (
       <div className="form-group">
-        <label htmlFor="emailInput">Confirm Email
-          <input type="text" name="emailConfirm" id="emailInputConfirm" className="form-control"
+        <label htmlFor="emailInput">Confirm email
+          <input type="email" name="emailConfirm" id="emailInputConfirm" className="form-control"
             onBlur={this.handleBlur}
             onChange={this.handleChange}
           />

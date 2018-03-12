@@ -1,10 +1,11 @@
-'strict';
 
 import React, { Component } from 'react';
 import './NewUserForm.css';
 import InputEmail from './subcomponents/InputEmail.js';
 import InputEmailConfirm from './subcomponents/InputEmailConfirm.js';
 import InputPassword from './subcomponents/InputPassword.js';
+import InputPasswordConfirm from './subcomponents/InputPasswordConfirm.js';
+import SubmitButton from './subcomponents/SubmitButton.js';
 
 
 class NewUserForm extends Component {
@@ -18,8 +19,8 @@ class NewUserForm extends Component {
       emailConfirm: false,
       battlenetId: "",
       password: "",
-      passwordConfirm: "",
-      ready: false,
+      passwordConfirm: false,
+      ready: true,
     }
   }
 
@@ -29,112 +30,49 @@ class NewUserForm extends Component {
     })
   }
 
-  // handleInputChange(event) {
-  //   const field = event.target.name;
-  //   const value = event.target.value;
-  //   // eslint-disable-next-line
-  //   switch(field) {
-  //     case "email":
-  //       this.setState({ email: value }, () => this.checkReady());
-  //       break;
-  //     case "username":
-  //       this.setState({ username: value }, () => this.checkReady());
-  //       break;
-  //     case "battlenetId":
-  //       this.setState({ battlenetId: value }, () => this.checkReady());
-  //       break;
-  //     case "password":
-  //       this.setState({ password: value }, () => this.checkReady());
-  //       break;
-  //     case "passwordConfirm":
-  //       this.setState({ passwordConfirm: value }, () => this.checkReady())
-  //   } 
-  // }
-
-  // validateEmail(email) {
-  //   // eslint-disable-next-line
-  //   const re = /^(([^<>()[\]{}'^?\\.,!|//#%*-+=&;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-  //   this.setState({ emailMessage: ""});
-  //   if (re.test(email)) {
-  //     return true;
-  //   } else {
-  //     this.setState({ emailMessage: "Invalid email address"});
-  //     return false;
-  //   }
-  // }
-
-  validatePassword(password) {
-    const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})");
-    if (passwordRegex.test(password)) {
-      this.setState({ passwordMessage: ""});
-      return true;
-    } else {
-      this.setState({ passwordMessage: "Passwords must be at least 6 characters long, and include at least one capital letter and one number"});
-      return false;
-    }
-  }
-
-  validatePasswordConfirm(passwordConfirm) {
-    if (passwordConfirm === this.state.password) {
-      this.setState({ passwordConfirmMessage: "" });
-      return true
-    } else {
-      this.setState({ passwordConfirmMessage: "Passwords do not match"});
-      return false
-    }
-  }
-
-  checkReady() {
-    if (this.state.username &&
-      this.state.email &&
-      this.state.password &&
-      this.state.passwordConfirm &&
-      this.state.battlenetId
+  checkReady = () => {
+    if (
+      this.state.email && this.state.emailConfirm &&
+      this.state.password && this.state.passwordConfirm &&
+      this.state.battlenetId && this.state.username
     ) {
-      if (this.validateEmail(this.state.email) &&
-          this.validatePassword(this.state.password) &&
-          this.validatePasswordConfirm(this.state.passwordConfirm)
-      ) {
-        this.setState({ ready: true});
-      } else {
-        this.setState({ ready: false });
-      }
-    } else {
-      this.setState({ ready: false });
-    }
+    this.setState({ ready: true });
+  } else {
+    this.setState({ ready: false});
   }
 
-  submitForm(event) {
+  submitNewUser = (event) => {
     event.preventDefault();
-    
-    this.props.onNewUserSubmit(
-      {
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password,
-        battlenetId: this.state.battlenetId
-      }
-    )
+    const data = {
+      email: this.state.email,
+      password: this.state.password,
+      username: "JediNinja",
+      bnetId: "Jedi1"
+    }
+    fetch('localhost:3001/public/register', {
+      body: JSON.stringify(data),
+      method: 'POST',
+      credentials: 'include',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      })
+    }).then( response => {
+      console.log(response);
+    }).catch( err => console.log(err));
   }
 
-  render() {
+  render = () => {
     return (
       <div>
-        Email: {this.state.email}
-        <br />
-        Password: {this.state.password}
-        <InputEmail
-          returnValue = {this.returnValue} 
-        />
-        <InputEmailConfirm 
-          emailToMatch = {this.state.email}
-          returnValue = {this.returnValue} 
-        />
-        <InputPassword 
-          returnValue = {this.returnValue}
-        />
+        <form className="text-left container-fluid">  
+          <InputEmail returnValue={this.returnValue} />
+          <InputEmailConfirm emailToMatch={this.state.email} returnValue={this.returnValue} />
+          <InputPassword returnValue={this.returnValue} />
+          <InputPasswordConfirm passwordToMatch={this.state.password} returnValue={this.returnValue} />
+          <SubmitButton submit={this.submitNewUser} ready={this.state.ready} >Register</SubmitButton>
+        </form>
       </div>
-    );
+    )
   }
 }
 

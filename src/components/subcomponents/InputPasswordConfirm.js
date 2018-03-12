@@ -13,7 +13,7 @@ class InputPasswordConfirm extends Component {
 
   handleChange = (e) => {
     if ( this.state.valid !== null ) {
-      this.validatePassword(e.target.value);
+      this.matchPassword(e.target.value);
     } 
   }
 
@@ -21,28 +21,27 @@ class InputPasswordConfirm extends Component {
   handleBlur = (e) => {
     if (this.state.valid === null) {
       this.setState({ valid: false });
-      this.validatePassword(e.target.value);
+      this.matchPassword(e.target.value);
+    } else {
+      this.matchPassword(e.target.value);
     }
   }
   
-  validatePassword = (password) => {
-    // eslint-disable-next-line
-    const passwordRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})");    
-    if (passwordRegex.test(password)) {
+  matchPassword = (password) => {
+    if (password === this.props.passwordToMatch) {
       this.setState({ valid: true, warning: '' })
-      this.props.returnValue('password', password)
+      this.props.returnValue('passwordConfirm', true)
+    } else {
+      this.setState({ valid: false, warning: 'Passwords do not match'})
+      this.props.returnValue('passwordConfirm', false)
     }
-    else {
-      this.setState({ valid: false, warning: 'Passwords do not match' })
-      this.props.returnValue('password', '')
-    }
-  } 
+  }
 
   render() {
     return (
       <div className="form-group">
-        <label htmlFor="emailInput">Password
-          <input type="password" name="password" id="passwordInput" className="form-control"
+        <label htmlFor="emailInput"> Confirm password
+          <input type="password" name="password" id="passwordInputConfirm" className="form-control"
             onBlur={this.handleBlur}
             onChange={this.handleChange}
           />
