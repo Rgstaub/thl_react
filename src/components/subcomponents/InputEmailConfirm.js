@@ -13,7 +13,7 @@ class InputEmailConfirm extends Component {
 
   handleChange = (e) => {
     if ( this.state.valid !== null ) {
-      this.matchEmail(e.target.value);
+      this.matchEmail(e.target.value.toLowerCase());
     } 
   }
 
@@ -21,10 +21,10 @@ class InputEmailConfirm extends Component {
   handleBlur = (e) => {
     if (this.state.valid === null) {
       this.setState({ valid: false });
-      this.matchEmail(e.target.value);
+      this.matchEmail(e.target.value.toLowerCase());
     } else {
       console.log(e.target.value);
-      this.matchEmail(e.target.value);
+      this.matchEmail(e.target.value.toLowerCase());
     }
   }
   

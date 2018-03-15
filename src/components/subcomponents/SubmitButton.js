@@ -26,11 +26,14 @@ const SubmitButton = (props) => {
   //     this.validateEmail(e.target.value);
   //   }
   // }
-  
+  const preventDefault = (e) => {
+    e.preventDefault();
+    props.submit(e);
+  }
 
   // render() {
     return (
-      <button className='btn btn-default' onClick={props.submit} disabled={!props.ready}>Register</button>
+      <button className='btn btn-default' onClick={ (e) => { preventDefault(e) }} disabled={!props.ready}>Register</button>
     )
   //}
 }

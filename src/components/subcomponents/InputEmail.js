@@ -11,20 +11,21 @@ class InputEmail extends Component {
     }
   }
 
+  // These two together make it so the field only validates on every change after it first loses focus
   handleChange = (e) => {
     if ( this.state.valid !== null ) {
-      this.validateEmail(e.target.value);
+      this.validateEmail(e.target.value.toLowerCase());
     } 
   }
-
-  // Don't validate the input until after the first time it loses focus
   handleBlur = (e) => {
     if (this.state.valid === null) {
       this.setState({ valid: false });
-      this.validateEmail(e.target.value);
-    }
+      this.validateEmail(e.target.value.toLowerCase());
+    } 
   }
   
+  // If the input passes the regex test, update the DOM as appropriate and return values to 
+  // update in the parent form's state
   validateEmail = (email) => {
     // eslint-disable-next-line
     const regEx = /^(([^<>()[\]{}'^?\\.,!|//#%*-+=&;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
@@ -33,7 +34,7 @@ class InputEmail extends Component {
       this.props.returnValue('email', email)
     }
     else {
-      this.setState({ valid: false, warning: 'Invalid email address' })
+      this.setState({ valid: false, warning: 'Invalid email address.' })
       this.props.returnValue('email', '')
     }
   } 
@@ -41,6 +42,7 @@ class InputEmail extends Component {
   render() {
     return (
       <div className="form-group">
+        <p>{this.props.email}</p>
         <label htmlFor="emailInput">Email
           <input type="email" name="email" id="emailInput" className="form-control"
             onBlur={this.handleBlur}

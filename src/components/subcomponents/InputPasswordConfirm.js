@@ -40,6 +40,7 @@ class InputPasswordConfirm extends Component {
   render() {
     return (
       <div className="form-group">
+        <p>{this.props.passwordConfirm}</p>
         <label htmlFor="emailInput"> Confirm password
           <input type="password" name="password" id="passwordInputConfirm" className="form-control"
             onBlur={this.handleBlur}
