@@ -6,6 +6,7 @@ import InputEmailConfirm from './subcomponents/InputEmailConfirm.js';
 import InputPassword from './subcomponents/InputPassword.js';
 import InputPasswordConfirm from './subcomponents/InputPasswordConfirm.js';
 import SubmitButton from './subcomponents/SubmitButton.js';
+import InputBnetId from './subcomponents/InputBnetId.js'
 
 
 class NewUserForm extends Component {
@@ -17,7 +18,7 @@ class NewUserForm extends Component {
       username: "JediNinja4",
       email: "",
       emailConfirm: false,
-      bnetId: "JediNinja4",
+      bnetId: "",
       password: "",
       passwordConfirm: false,
       messages: []
@@ -36,7 +37,7 @@ class NewUserForm extends Component {
       email: this.state.email,
       password: this.state.password,
       username: "JediNinja207",
-      bnetId: "Jedi207"
+      bnetId: this.state.bnetId
     }
     fetch('/public/register', {
       body: JSON.stringify(data),
@@ -74,6 +75,7 @@ class NewUserForm extends Component {
           <InputEmailConfirm emailToMatch={this.state.email} returnValue={this.collectInputValue} />
           <InputPassword returnValue={this.collectInputValue} />
           <InputPasswordConfirm passwordToMatch={this.state.password} returnValue={this.collectInputValue} />
+          <InputBnetId returnValue={this.collectInputValue} />
           <SubmitButton submit={this.submitNewUser} ready={ready} >Register</SubmitButton>
           {this.state.messages.map( (error, index) => {
             return <p key={index}>{error}</p>
