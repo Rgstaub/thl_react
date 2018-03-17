@@ -6,7 +6,8 @@ import InputEmailConfirm from './subcomponents/InputEmailConfirm.js';
 import InputPassword from './subcomponents/InputPassword.js';
 import InputPasswordConfirm from './subcomponents/InputPasswordConfirm.js';
 import SubmitButton from './subcomponents/SubmitButton.js';
-import InputBnetId from './subcomponents/InputBnetId.js'
+import InputBnetId from './subcomponents/InputBnetId.js';
+import InputUsername from './subcomponents/InputUsername.js'
 
 
 class NewUserForm extends Component {
@@ -15,7 +16,7 @@ class NewUserForm extends Component {
     super(props);
 
     this.state={
-      username: "JediNinja4",
+      username: "",
       email: "",
       emailConfirm: false,
       bnetId: "",
@@ -36,7 +37,7 @@ class NewUserForm extends Component {
     const data = {
       email: this.state.email,
       password: this.state.password,
-      username: "JediNinja207",
+      username: this.state.username,
       bnetId: this.state.bnetId
     }
     fetch('/public/register', {
@@ -57,15 +58,26 @@ class NewUserForm extends Component {
   }
 
   render() {
-    let ready;
-    if (
-      this.state.email && this.state.emailConfirm &&
-      this.state.password && this.state.passwordConfirm &&
-      this.state.bnetId && this.state.username
-    ) {
-      ready = true;
-    } else {
-      ready = false;
+    // let ready;
+    // if (
+    //   this.state.email && this.state.emailConfirm &&
+    //   this.state.password && this.state.passwordConfirm &&
+    //   this.state.bnetId && this.state.username
+    // ) {
+    //   ready = true;
+    // } else {
+    //   ready = false;
+    // }
+    const ready = () => {
+      if (
+        this.state.email && this.state.emailConfirm &&
+        this.state.password && this.state.passwordConfirm &&
+        this.state.bnetId && this.state.username
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     }
 
     return (
@@ -76,7 +88,8 @@ class NewUserForm extends Component {
           <InputPassword returnValue={this.collectInputValue} />
           <InputPasswordConfirm passwordToMatch={this.state.password} returnValue={this.collectInputValue} />
           <InputBnetId returnValue={this.collectInputValue} />
-          <SubmitButton submit={this.submitNewUser} ready={ready} >Register</SubmitButton>
+          <InputUsername returnValue={this.collectInputValue} />
+          <SubmitButton submit={this.submitNewUser} ready={ready()} >Register</SubmitButton>
           {this.state.messages.map( (error, index) => {
             return <p key={index}>{error}</p>
           })}

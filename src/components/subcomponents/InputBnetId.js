@@ -30,12 +30,10 @@ class InputBnetId extends Component {
     // eslint-disable-next-line
     const regEx = /^[A-Za-z\u0080-\u00FF]{1}([A-Za-z0-9\u0080-\u00FF]{2,11})#[0-9]{4,5}$/;
     if (regEx.test(bnetId)) {
-      console.log("VALID")
       this.setState({ valid: true, warning: '' })
       this.props.returnValue('bnetId', bnetId)
     }
     else {
-      console.log("INVALID")
       this.setState({ valid: false, warning: 'Invalid Battle.net ID.' })
       this.props.returnValue('bnetId', '')
     }
