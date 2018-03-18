@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import NewUserForm from './components/NewUserForm';
+import NavBar from './components/NavBar';
 
 class App extends Component {
 
@@ -53,6 +54,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <NavBar />
         <NewUserForm 
           onNewUserSubmit={ newUser => this.postNewUser(newUser) }
         />

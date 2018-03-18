@@ -33,7 +33,7 @@ class NewUserForm extends Component {
   }
 
   submitNewUser = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     const data = {
       email: this.state.email,
       password: this.state.password,
@@ -58,16 +58,7 @@ class NewUserForm extends Component {
   }
 
   render() {
-    // let ready;
-    // if (
-    //   this.state.email && this.state.emailConfirm &&
-    //   this.state.password && this.state.passwordConfirm &&
-    //   this.state.bnetId && this.state.username
-    // ) {
-    //   ready = true;
-    // } else {
-    //   ready = false;
-    // }
+
     const ready = () => {
       if (
         this.state.email && this.state.emailConfirm &&
@@ -82,7 +73,7 @@ class NewUserForm extends Component {
 
     return (
       <div>
-        <form className="text-left container-fluid">  
+        <form className="text-center ">  
           <InputEmail returnValue={this.collectInputValue} email={this.state.email} />
           <InputEmailConfirm emailToMatch={this.state.email} returnValue={this.collectInputValue} />
           <InputPassword returnValue={this.collectInputValue} />
@@ -90,9 +81,10 @@ class NewUserForm extends Component {
           <InputBnetId returnValue={this.collectInputValue} />
           <InputUsername returnValue={this.collectInputValue} />
           <SubmitButton submit={this.submitNewUser} ready={ready()} >Register</SubmitButton>
-          {this.state.messages.map( (error, index) => {
-            return <p key={index}>{error}</p>
-          })}
+          <br /><br />
+            {this.state.messages.map( (error, index) => {
+              return <p className="alert alert-danger" key={index}>{error}</p>
+            })}
         </form>
       </div>
     )

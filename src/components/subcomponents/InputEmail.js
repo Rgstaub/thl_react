@@ -42,7 +42,6 @@ class InputEmail extends Component {
   render() {
     return (
       <div className="form-group">
-        <p>{this.props.email}</p>
         <label htmlFor="emailInput">Email
           <input type="email" name="email" id="emailInput" className="form-control"
             onBlur={this.handleBlur}
