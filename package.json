@@ -1,17 +1,24 @@
 {
-  "name": "thl-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.1.0"
-  },
+  "name": "thl_react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "proxy": "http://localhost:3001"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rgstaub/thl_react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rgstaub/thl_react/issues"
+  },
+  "homepage": "https://github.com/Rgstaub/thl_react#readme",
+  "dependencies": {
+    "@material-ui/core": "^1.2.1",
+    "create-react-app": "^1.5.2",
+    "react": "^16.4.1"
+  }
 }
