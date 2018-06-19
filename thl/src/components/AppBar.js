@@ -1,5 +1,4 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -7,26 +6,27 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuDrawer from './MenuDrawer';
 import AccountIcon from './AccountIcon';
-//import Avatar from '@material-ui/core/Avatar';
 
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-};
 
 class TopBar extends React.Component {
   state = {
-    drawerOpen: false
+    drawerOpen: false,
+    menuOpen: false
   }
 
   closeDrawer = () => {
     this.setState({drawerOpen: false});
   }
-
   openDrawer = () => {
     this.setState({drawerOpen: true});
   }
+  openMenu = () => {
+    this.setState({menuOpen: true})
+  }
+  closeMenu = () => {
+    this.setState({menuOpen: false})
+  }
+
 
   render() {
 
@@ -34,7 +34,7 @@ class TopBar extends React.Component {
       <div >
         <AppBar position="static" color="default">
           <Toolbar>
-            <IconButton  color="inherit" aria-label="Menu">
+            <IconButton aria-label="Menu">
               <MenuIcon 
                 onClick={this.openDrawer}
               />
@@ -42,14 +42,18 @@ class TopBar extends React.Component {
             <Typography variant="title" color="inherit">
               Ragnaros League
             </Typography>
-            <AccountIcon />
+            <AccountIcon 
+              src={this.props.avatarSrc}
+              menuOpen={this.state.menuOpen}
+              closeMenu={this.closeMenu}
+              openMenu={this.openMenu}
+            />
           </Toolbar>
           <MenuDrawer
             drawerState={this.state.drawerOpen}
             closeDrawer={this.closeDrawer}
             openDrawer={this.openDrawer}
           />
-
         </AppBar>
       </div>
     );
@@ -57,4 +61,4 @@ class TopBar extends React.Component {
 }
 
 
-export default withStyles(styles)(TopBar);
+export default TopBar;

@@ -1,30 +1,34 @@
+//eslint-disable import/first
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
+import Avatar from '@material-ui/core/Avatar';
+import AccountMenu from './AccountMenu';
+import ('./AccountIcon.css');
 
-const styles = {
-  dummy: { 
-    float: 'right',
-    color: '#FFF'
-  }
-};
+function AccountIcon(props) {
+  const { menuOpen, src, closeMenu, openMenu } = props;
 
-const Dummy = (props) => {
   return (
-    <div class className='dummy'>
-      Hi
+    <div >
+      <Avatar
+        src={src}
+        alt="User avatar thumbnail"
+        className="account-icon"
+        onClick={openMenu}
+      />
+      <AccountMenu 
+        menuOpen={menuOpen}
+        closeMenu={closeMenu}
+        openMenu={openMenu}
+      />
     </div>
   )
 }
 
-Dummy.propTypes = {
-  // classname: PropTypes.string
+AccountIcon.propTypes = {
+  src: PropTypes.string,
+  menuOpen: PropTypes.bool
 };
 
-const StyledDummy = withStyles(styles)(Dummy)
 
-export default function CssInJs() {
-  return (
-    <StyledDummy/>
-  )
-}
+export default AccountIcon;

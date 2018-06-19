@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import AppBar from './components/AppBar.js';
-//import MenuDrawer from './components/MenuDrawer.js';
+
 
 
 class App extends Component {
+
+  state = {
+    avatarSrc: './images/userAvatars/image.png'
+  }
   render() {
     return (
       <div className="App">
-        <AppBar/>
+        <AppBar
+          avatarSrc={this.state.avatarSrc}
+        />
       </div>
     );
   }
