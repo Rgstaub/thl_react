@@ -4,15 +4,46 @@ import AppBar from './components/AppBar.js';
 
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      avatarSrc: './images/userAvatars/image.png',
+      currentLeague: {
+        name: 'Sylvanas League',
+        id: 'sylvanas'
+      },
+      allLeagues: [
+        {
+          "name": 'Sylvanas League',
+          "id": 'sylvanas'
+        },
+        {
+          "name": 'Ragnaros League',
+          "id": 'ragnaros'
+        },
+        {
+          "name": 'Mysterious Challenger League',
+          "id": 'mysteriousChallenger'
+        }
+      ]
+    }
 
-  state = {
-    avatarSrc: './images/userAvatars/image.png'
+    this.handleLeagueSelection = (event) => {
+      console.log(event);
+      this.setState({currentLeague: {
+        name: 'Luke',
+        id: 'luke'
+      }})
+    }
+  
   }
+
+
   render() {
     return (
       <div className="App">
         <AppBar
-          avatarSrc={this.state.avatarSrc}
+           handleLeagueSelection={this.handleLeagueSelection} {...this.state}
         />
       </div>
     );

@@ -4,13 +4,13 @@ import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import { menuItems } from '../content/menuItems.json';
+import { navDrawer } from '../content/menuItems.json';
 
 
 
 const NavDrawer = ({drawerState, closeDrawer, openDrawer}) => {
 
-    const menuList = menuItems.map( item => {
+    const menuList = navDrawer.map( item => {
       return (
         <ListItem key={item.name.toString()}><Button>{item.name}</Button></ListItem>
       )
@@ -23,6 +23,7 @@ const NavDrawer = ({drawerState, closeDrawer, openDrawer}) => {
           open={drawerState}
           onClose={closeDrawer}
           onOpen={openDrawer}
+          anchor='right'
         >
           <div
             tabIndex={0}

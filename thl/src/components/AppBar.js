@@ -1,18 +1,27 @@
+
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import MenuDrawer from './MenuDrawer';
 import AccountIcon from './AccountIcon';
+import LeagueSelect from './LeagueSelect';
 
 
-class TopBar extends React.Component {
-  state = {
-    drawerOpen: false,
-    menuOpen: false
+export default class TopBar extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      drawerOpen: false,
+      menuOpen: false
+    }
   }
+
+
+  
+
 
   closeDrawer = () => {
     this.setState({drawerOpen: false});
@@ -27,7 +36,6 @@ class TopBar extends React.Component {
     this.setState({menuOpen: false})
   }
 
-
   render() {
 
     return (
@@ -39,9 +47,7 @@ class TopBar extends React.Component {
                 onClick={this.openDrawer}
               />
             </IconButton>
-            <Typography variant="title" color="inherit">
-              Ragnaros League
-            </Typography>
+            <LeagueSelect handleLeagueSelection={this.props.handleLeagueSelection} {...this.props} />
             <AccountIcon 
               src={this.props.avatarSrc}
               menuOpen={this.state.menuOpen}
@@ -59,6 +65,3 @@ class TopBar extends React.Component {
     );
   }
 }
-
-
-export default TopBar;
