@@ -4,6 +4,9 @@ import React from 'react';
 // import ('./Dummy.css');
 // import  from '@material-ui/core/';
 
+// Dummy.propTypes = {
+//   classname: PropTypes.string
+// };
 
 function Dummy(props) {
   // const {} = props;
@@ -14,9 +17,5 @@ function Dummy(props) {
     </div>
   )
 }
-
-// Dummy.propTypes = {
-//   classname: PropTypes.string
-// };
 
 export default Dummy;

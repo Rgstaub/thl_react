@@ -8,14 +8,32 @@ import { accountMenu } from '../content/menuItems.json';
 
 
 function AccountMenu(props) {
-  const { menuOpen, closeMenu } = props;
+  const { menuOpen, closeMenu, loggedIn, handleLogout } = props;
   const anchorEl = document.querySelector('.account-icon');
 
-  const menuList = accountMenu.map( item => {
-    return (
+  const menuList = accountMenu.map( (item, i) => {
+    return(
       <MenuItem key={item.name.toString()}>{item.name}</MenuItem>
     )
   })
+
+  const clickLogout = () => {
+    handleLogout();
+    closeMenu()
+  }
+    
+  const loginLogout = () => {
+    if (loggedIn) {
+      return (
+        <MenuItem onClick={clickLogout} key={'logout'}>Log Out</MenuItem>
+      )
+    } else {
+      return (
+        <MenuItem key={'login'}>Log In</MenuItem>
+      )
+    }
+  }
+
 
   return (
     <div>
@@ -25,8 +43,9 @@ function AccountMenu(props) {
         onClose={closeMenu}
       >
       {menuList}
+      {loginLogout()}
       </Menu>
-    </div>
+    </div>  
   )
 }
 

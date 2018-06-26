@@ -6,12 +6,20 @@ import AccountMenu from './AccountMenu';
 import ('./AccountIcon.css');
 
 function AccountIcon(props) {
-  const { menuOpen, src, closeMenu, openMenu } = props;
+  const { menuOpen, src, closeMenu, openMenu, loggedIn, handleLogout } = props;
+
+  const setAvatar = () => {
+    if (loggedIn) {
+      return src;
+    } else {
+      return './images/userAvatars/image.png'
+    }
+  }
 
   return (
     <div >
       <Avatar
-        src={src}
+        src={setAvatar()}
         alt="User avatar thumbnail"
         className="account-icon"
         onClick={openMenu}
@@ -20,6 +28,8 @@ function AccountIcon(props) {
         menuOpen={menuOpen}
         closeMenu={closeMenu}
         openMenu={openMenu}
+        loggedIn={loggedIn}
+        handleLogout={handleLogout}
       />
     </div>
   )
