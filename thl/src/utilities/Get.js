@@ -18,4 +18,3 @@ const Get = (url) => {
 }
 
 export default Get;
-  
