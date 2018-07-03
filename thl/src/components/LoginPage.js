@@ -4,7 +4,9 @@ import React from 'react';
 import Input from '@material-ui/core/Input';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button';
+import StyledButton from './StyledButton';
+import StyledLink from './StyledLink';
+import Typography from '@material-ui/core/Typography';
 import ('./LoginPage.css');
 
 // LoginPage.propTypes = {
@@ -74,10 +76,10 @@ export default class LoginPage extends React.Component {
 
   handleResponse = (response) => {
     if (response.error) {
-      this.setState({failedLogin: true})
+      this.props.displayAlert(response.error, 2500, 'error')
     } else {
       this.setState({failedLogin: false})
-      this.props.handleLogin();
+      this.props.handleLogin(response);
     }
   }
 
@@ -106,6 +108,7 @@ export default class LoginPage extends React.Component {
   render() {
     return (
       <div className='login-page'>
+        <Typography variant='title'>Login</Typography>
         <form>
         <FormControl className='input-group' fullWidth >
           <InputLabel>Email</InputLabel>
@@ -115,14 +118,18 @@ export default class LoginPage extends React.Component {
           <InputLabel>Password</InputLabel>
           <Input name='password' onChange={this.handlePasswordChange}/>
         </FormControl>
-        <Button
+        <StyledButton
           className='login-button'
           onClick={this.handleSubmit}
           disabled={!(this.state.validEmail && this.state.validPassword)}
-          color='primary'
+          text={'Login'}
         >
           Login
-        </Button>
+        </StyledButton>
+        <StyledLink 
+          text='...or register'
+          onClick={ () => this.props.setPage('register')}
+        />
         {this.errorMessage()}
         </form>
       </div>

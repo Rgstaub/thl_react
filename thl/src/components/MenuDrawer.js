@@ -8,11 +8,18 @@ import { navDrawer } from '../content/menuItems.json';
 
 
 
-const NavDrawer = ({drawerState, closeDrawer, openDrawer}) => {
+const NavDrawer = (props) => {
+
+  const {drawerState, closeDrawer, openDrawer, handleNavSelection } = props;
 
     const menuList = navDrawer.map( item => {
+
       return (
-        <ListItem key={item.name.toString()}><Button>{item.name}</Button></ListItem>
+        <ListItem key={item.name.toString()}>
+          <Button
+            onClick={(e) => handleNavSelection(e, item.pageId)}
+          >{item.name}</Button>
+        </ListItem>
       )
     })
 
@@ -23,7 +30,7 @@ const NavDrawer = ({drawerState, closeDrawer, openDrawer}) => {
           open={drawerState}
           onClose={closeDrawer}
           onOpen={openDrawer}
-          anchor='right'
+          anchor='left'
         >
           <div
             tabIndex={0}

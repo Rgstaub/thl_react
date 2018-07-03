@@ -6,7 +6,7 @@ import AccountMenu from './AccountMenu';
 import ('./AccountIcon.css');
 
 function AccountIcon(props) {
-  const { menuOpen, src, closeMenu, openMenu, loggedIn, handleLogout } = props;
+  const { menuOpen, src, closeMenu, openMenu, loggedIn, handleLogout, handleNavSelection } = props;
 
   const setAvatar = () => {
     if (loggedIn) {
@@ -30,6 +30,7 @@ function AccountIcon(props) {
         openMenu={openMenu}
         loggedIn={loggedIn}
         handleLogout={handleLogout}
+        handleNavSelection={handleNavSelection}
       />
     </div>
   )

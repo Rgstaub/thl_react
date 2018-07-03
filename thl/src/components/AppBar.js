@@ -47,6 +47,8 @@ export default class TopBar extends React.Component {
             drawerState={this.state.drawerOpen}
             closeDrawer={this.closeDrawer}
             openDrawer={this.openDrawer}
+            handleNavSelection={this.props.handleNavSelection}
+            {...this.props}
           />
             <IconButton aria-label="Menu">
               <MenuIcon 
@@ -61,6 +63,7 @@ export default class TopBar extends React.Component {
               openMenu={this.openMenu}
               loggedIn={this.props.loggedIn}
               handleLogout={this.props.handleLogout}
+              handleNavSelection={this.props.handleNavSelection}
             />
           </Toolbar>
 

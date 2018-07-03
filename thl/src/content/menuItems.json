@@ -1,21 +1,26 @@
 {
   "navDrawer": [
     {
-      "name": "Match"
+      "name": "Dashboard",
+      "pageId": "dashboard"
     },
     {
-      "name": "Team"
+      "name": "Team",
+      "pageId": "team"
     },    
     {
-      "name": "History"
+      "name": "League",
+      "pageId": "league"
     },    
     {
-      "name": "Messages"
+      "name": "Streams",
+      "pageId": "streams"
     }
   ],
   "accountMenu": [
     {
-      "name": "Account"
+      "name": "Account",
+      "pageId": "account"
     },
     {
       "name": "Messages"

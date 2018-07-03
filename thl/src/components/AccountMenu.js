@@ -8,12 +8,18 @@ import { accountMenu } from '../content/menuItems.json';
 
 
 function AccountMenu(props) {
-  const { menuOpen, closeMenu, loggedIn, handleLogout } = props;
+  const { menuOpen, closeMenu, loggedIn, handleLogout, handleNavSelection } = props;
   const anchorEl = document.querySelector('.account-icon');
 
   const menuList = accountMenu.map( (item, i) => {
     return(
-      <MenuItem key={item.name.toString()}>{item.name}</MenuItem>
+      <MenuItem 
+        key={item.name.toString()} 
+        pageid={item.pageId} 
+        onClick={(e) => handleNavSelection(e, item.pageId)}
+      >
+      {item.name}
+      </MenuItem>
     )
   })
 
@@ -25,11 +31,25 @@ function AccountMenu(props) {
   const loginLogout = () => {
     if (loggedIn) {
       return (
-        <MenuItem onClick={clickLogout} key={'logout'}>Log Out</MenuItem>
+        <Menu 
+        anchorEl={anchorEl}
+        open={menuOpen}
+        onClose={closeMenu}
+        >
+          {menuList}
+          <MenuItem onClick={clickLogout} key={'logout'}>Log Out</MenuItem>
+        </Menu>
       )
     } else {
       return (
-        <MenuItem key={'login'}>Log In</MenuItem>
+        <Menu 
+        anchorEl={anchorEl}
+        open={menuOpen}
+        onClose={closeMenu}
+      >
+        <MenuItem key={'login'} onClick={(e) => handleNavSelection(e, 'login')}>Log In</MenuItem>
+      </Menu>
+        
       )
     }
   }
@@ -37,15 +57,8 @@ function AccountMenu(props) {
 
   return (
     <div>
-      <Menu 
-        anchorEl={anchorEl}
-        open={menuOpen}
-        onClose={closeMenu}
-      >
-      {menuList}
       {loginLogout()}
-      </Menu>
-    </div>  
+    </div>
   )
 }
 
