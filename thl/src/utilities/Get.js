@@ -13,7 +13,11 @@ const Get = (url) => {
     redirect: 'follow', // manual, *follow, error
     referrer: 'no-referrer', // *client, no-referrer
   }).then(response => {
-    return response.json()
+    if (response.status === 200) {
+      return response.json()
+    } else {
+      return ({error: 'Server error'})
+    }
   })
 }
 
