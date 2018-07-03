@@ -1,7 +1,7 @@
 {
   "name": "thl_react",
   "version": "1.0.0",
-  "description": "",
+  "description": "The React.js front-end for Team Hearth League",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -20,6 +20,7 @@
   "dependencies": {
     "@material-ui/core": "^1.2.1",
     "create-react-app": "^1.5.2",
-    "react": "^16.4.1"
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   }
 }
